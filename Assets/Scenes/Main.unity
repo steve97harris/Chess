@@ -191,6 +191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 458730413}
   - component: {fileID: 458730412}
+  - component: {fileID: 458730414}
   m_Layer: 0
   m_Name: ChessBoard
   m_TagString: Untagged
@@ -224,6 +225,11 @@ MonoBehaviour:
   - {fileID: 1239270685352430, guid: c77f218d9ab1f424384acc3b86c56de1, type: 3}
   - {fileID: 1335334207052556, guid: e0c5356476a49ba449f2789ccdbf2c24, type: 3}
   activeChessman: []
+  environmentPrefabs:
+  - {fileID: 1634452787968558, guid: c364da1e00b6a954c9da291cba0e718f, type: 3}
+  - {fileID: 1859036317018948, guid: 4070279820fd8cf45abb350380694c52, type: 3}
+  - {fileID: 1206300752043334, guid: 0bd9b4747be9a8d45a0bc55057116f45, type: 3}
+  - {fileID: 1206300752043334, guid: 0bc4bf91a3a9b19409613bea5318e33c, type: 3}
 --- !u!4 &458730413
 Transform:
   m_ObjectHideFlags: 0
@@ -239,6 +245,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &458730414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458730411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28fa99403b8171b43815f92625813d44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,6 +268,7 @@ GameObject:
   - component: {fileID: 534669905}
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
+  - component: {fileID: 534669906}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -321,6 +340,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 30.5, y: 0, z: 0}
+--- !u!114 &534669906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534669902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 707c204fa98a7da4699cb043f4044cd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &898786302
 GameObject:
   m_ObjectHideFlags: 0

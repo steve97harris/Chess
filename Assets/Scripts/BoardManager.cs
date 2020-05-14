@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
 public class BoardManager : MonoBehaviour
 {
+    public static BoardManager Instance { get; set; }
+    private bool[][] validMoves { get; set; }
+    
     private const float TILE_SIZE = 1.0f;
     private const float TILE_OFFSET = 0.5F;
 
@@ -13,18 +17,47 @@ public class BoardManager : MonoBehaviour
 
     public List<GameObject> chessmanPrefabs = new List<GameObject>();
     public List<GameObject> activeChessman = new List<GameObject>();
+    
+    public List<GameObject> environmentPrefabs = new List<GameObject>();
 
     private Quaternion orientation = Quaternion.Euler(0, 180, 0);
+    
+    public Chessman[][] chessmen { get; set; }
+    private Chessman selectedChessman;
+
+    public bool isWhiteTurn = true;
+
+    private Material previousMat;
+    public Material selectedMat;
+    
+    public int[] EnPassantMove { set; get; }
+    
 
     private void Start()
     {
         SpawnAllChessman();
+        SpawnEnvironment();
     }
 
     private void Update()
     {
         DrawChessboard();
         UpdateSelection();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (selectionX >= 0 && selectionY >= 0)
+            {
+                if (selectedChessman == null)
+                {
+                    SelectChessman(selectionX, selectionY);
+                }
+                else
+                {
+                    MoveChessman(selectionX, selectionY);
+                }
+            }
+        }
     }
 
     private void UpdateSelection()
@@ -48,7 +81,7 @@ public class BoardManager : MonoBehaviour
 
     private void SpawnChessman(int index, Vector3 position)
     {
-        GameObject gameOb = Instantiate(chessmanPrefabs[index], position, orientation) as GameObject;
+        var gameOb = Instantiate(chessmanPrefabs[index], position, orientation) as GameObject;
         gameOb.transform.SetParent(transform);
         activeChessman.Add(gameOb);
     }
@@ -114,12 +147,12 @@ public class BoardManager : MonoBehaviour
         for (int i = 0; i <= 8; i++)
         {
             Vector3 start = Vector3.forward * i;
-            Debug.DrawLine(start, start + widthLine);
+            // Debug.DrawLine(start, start + widthLine);
             
             for (int j = 0; j <= 8; j++)
             {
                 start = Vector3.right * j;
-                Debug.DrawLine(start, start + heightLine);
+                // Debug.DrawLine(start, start + heightLine);
             }
         }
         
@@ -134,5 +167,55 @@ public class BoardManager : MonoBehaviour
                 Vector3.forward * (selectionY + 1) + Vector3.right * selectionX, 
                 Vector3.forward * selectionY + Vector3.right * (selectionX + 1));
         }
+    }
+
+    private void SpawnChessboardEnvironment(int index, Vector3 position)
+    {
+        var obj = Instantiate(environmentPrefabs[index], position, index == 3 ? Quaternion.Euler(0, 180, 0) : Quaternion.identity);
+        obj.transform.SetParent(transform);
+    }
+
+    private void SpawnEnvironment()
+    {
+        SpawnChessboardEnvironment(0,new Vector3(4,-0.6f,4));
+        SpawnChessboardEnvironment(1,new Vector3(4,-0.38f,4));
+        SpawnChessboardEnvironment(2,new Vector3(-0.375f,1.35f,-0.566f));
+        SpawnChessboardEnvironment(3,new Vector3(-0.4f,1.35f,8.54f));
+    }
+    
+    public void SelectChessman(int x, int y)
+    {
+        if (chessmen[x][y] == null)
+            return;
+
+        if (chessmen[x][y].isWhite != isWhiteTurn)
+            return;
+
+        var hasAtLeastOneMove = false;
+
+        validMoves = chessmen[x][y].PossibleMoves();
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                if (validMoves[x][y])
+                {
+                    hasAtLeastOneMove = true;
+                    i = 8;
+                    break;
+                }
+            }
+        }
+        
+        if (!hasAtLeastOneMove)
+            return;
+
+        selectedChessman = chessmen[x][y];
+        //previousMat = selectedChessman.GetComponent<MeshRenderer>().material;
+    }
+
+    public void MoveChessman(int x, int y)
+    {
+        
     }
 }
