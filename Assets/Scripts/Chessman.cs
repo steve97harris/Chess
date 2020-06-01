@@ -1,6 +1,8 @@
-﻿namespace DefaultNamespace
+﻿using UnityEngine;
+
+namespace DefaultNamespace
 {
-    public class Chessman
+    public class Chessman : MonoBehaviour
     {
         public int currentX { get; set; }
         public int currentY { get; set; }
@@ -13,16 +15,16 @@
             currentY = y;
         }
 
-        public virtual bool[][] PossibleMoves()
+        public virtual bool PossibleMove(int x, int y)
         {
-            return new bool [8][];
+            return true;
         }
 
         public bool Move(int x, int y, ref bool[][] r) // r - result?
         {
             if (x >= 0 && x < 8 && y >= 0 && y < 8)
             {
-                var chessman = BoardManager.Instance.chessmen[x][y];
+                var chessman = BoardManager.Instance.chessmen[x,y];
                 if (chessman == null)
                     r[x][y] = true;
                 else
