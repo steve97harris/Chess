@@ -6,11 +6,21 @@ using UnityEngine;
 
 public class BoardManager : MonoBehaviour
 {
+    public static BoardManager Instance
+    {
+        set; 
+        get;
+    }
+
+    private bool[,] allowedMoves
+    {
+        set; 
+        get;
+    }
+
     public Chessman[,] chessmen { set; get; }
     private Chessman selectedChessman;
-    public static BoardManager Instance { get; set; }
-    private bool[][] validMoves { get; set; }
-    
+
     private const float TILE_SIZE = 1.0f;
     private const float TILE_OFFSET = 0.5F;
 
@@ -34,6 +44,7 @@ public class BoardManager : MonoBehaviour
 
     private void Start()
     {
+        Instance = this;
         SpawnAllChessman();
         SpawnEnvironment();
     }
@@ -47,10 +58,12 @@ public class BoardManager : MonoBehaviour
         {
             if (selectionX >= 0 && selectionY >= 0)
             {
+                Debug.LogError("selectionX = " + selectionX);
+                Debug.LogError("selectionY = " + selectionY);
                 if (selectedChessman == null)
                 {
                     // if chessman is not selected, select a chessman
-                    SelectChessman(selectionX, selectionY);        
+                    SelectChessman(selectionX, selectionY);
                 }
                 else
                 {
@@ -196,20 +209,24 @@ public class BoardManager : MonoBehaviour
         if (chessmen[x,y].isWhite != isWhiteTurn)        // if not white turn, return
             return;
 
+        allowedMoves = chessmen[x, y].PossibleMove(x,y);
         selectedChessman = chessmen[x,y];
         
+        BoardHighlights.Instance.HighlightAllowedMoves(allowedMoves);
     }
 
     private void MoveChessman(int x, int y)
     {
-        if (selectedChessman.PossibleMove(x, y))
+        if (allowedMoves[x,y])
         {
             chessmen[selectedChessman.currentX,selectedChessman.currentY] = null;
             selectedChessman.transform.position = GetTileCenter(x, y);
+            selectedChessman.SetPosition(x,y);
             chessmen[x,y] = selectedChessman;
             isWhiteTurn = !isWhiteTurn;
         }
 
+        BoardHighlights.Instance.HideHighlights();
         selectedChessman = null;
     }
 }

@@ -4,8 +4,8 @@ namespace DefaultNamespace
 {
     public class Chessman : MonoBehaviour
     {
-        public int currentX { get; set; }
-        public int currentY { get; set; }
+        public int currentX { set; get; }
+        public int currentY { set; get; }
 
         public bool isWhite;
 
@@ -15,9 +15,9 @@ namespace DefaultNamespace
             currentY = y;
         }
 
-        public virtual bool PossibleMove(int x, int y)
+        public virtual bool[,] PossibleMove(int x, int y)
         {
-            return true;
+            return new bool[8,8];
         }
 
         public bool Move(int x, int y, ref bool[][] r) // r - result?

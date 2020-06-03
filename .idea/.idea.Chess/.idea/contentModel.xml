@@ -10,6 +10,7 @@
           <e p="Readme Eng.txt" t="Include" />
         </e>
         <e p="Scripts" t="Include">
+          <e p="BoardHighlights.cs" t="Include" />
           <e p="BoardManager.cs" t="Include" />
           <e p="CameraController.cs" t="Include" />
           <e p="Chessman.cs" t="Include" />
@@ -22,7 +23,6 @@
             <e p="Queen.cs" t="Include" />
             <e p="Rook.cs" t="Include" />
           </e>
-          <e p="TileSelector.cs" t="Include" />
         </e>
       </e>
       <e p="Chess.sln" t="IncludeFlat" />
