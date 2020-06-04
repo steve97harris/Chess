@@ -9,80 +9,81 @@ namespace DefaultNamespace
         {
             var r = new bool[8,8];
             Chessman c, c2;
-            currentX = x;
-            currentY = y;
+            CurrentX = x;
+            CurrentY = y;
             
             // White team move
             if (isWhite)
             {
-                Debug.LogError("currentX = " + currentX);
-                Debug.LogError("currentY = " + currentY);
+                Debug.LogError("currentX = " + CurrentX);
+                Debug.LogError("currentY = " + CurrentY);
                 // Diagonal Left
-                if (currentX != 0 && currentY != 7)
+                if (CurrentX != 0 && CurrentY != 7)
                 {
-                    c = BoardManager.Instance.chessmen[currentX - 1, currentY + 1];
-                    if (c != null && c.isWhite)
-                        r[currentX - 1, currentY + 1] = true;
+                    // check for instance of another chessman in position x-1, y+1;
+                    c = BoardManager.Instance.chessmen[CurrentX - 1, CurrentY + 1];       
+                    if (c != null && !c.isWhite)
+                        r[CurrentX - 1, CurrentY + 1] = true;
                 }
                 
                 // Diagonal Right
-                if (currentX != 7 && currentY != 7)
+                if (CurrentX != 7 && CurrentY != 7)
                 {
-                    c = BoardManager.Instance.chessmen[currentX + 1, currentY + 1];
-                    if (c != null && c.isWhite)
-                        r[currentX + 1, currentY + 1] = true;
+                    c = BoardManager.Instance.chessmen[CurrentX + 1, CurrentY + 1];
+                    if (c != null && !c.isWhite)
+                        r[CurrentX + 1, CurrentY + 1] = true;
                 }
                 
                 // Middle 
-                if (currentY != 7)
+                if (CurrentY != 7)
                 {
-                    c = BoardManager.Instance.chessmen[currentX, currentY + 1];
+                    c = BoardManager.Instance.chessmen[CurrentX, CurrentY + 1];
                     if (c == null)
-                        r[currentX, currentY + 1] = true;
+                        r[CurrentX, CurrentY + 1] = true;
                 }
                 
                 // Middle on first move
-                if (currentY == 1)
+                if (CurrentY == 1)
                 {
-                    c = BoardManager.Instance.chessmen[currentX, currentY + 1];
-                    c2 = BoardManager.Instance.chessmen[currentX, currentY + 2];
+                    c = BoardManager.Instance.chessmen[CurrentX, CurrentY + 1];
+                    c2 = BoardManager.Instance.chessmen[CurrentX, CurrentY + 2];
                     if (c == null & c2 == null)
-                        r[currentX, currentY + 2] = true;
+                        r[CurrentX, CurrentY + 2] = true;
                 }
             }
             else
             {
                 // Diagonal Left
-                if (currentX != 0 && currentY != 0)
+                if (CurrentX != 0 && CurrentY != 0)
                 {
-                    c = BoardManager.Instance.chessmen[currentX - 1, currentY - 1];
-                    if (c != null && !c.isWhite)
-                        r[currentX - 1, currentY - 1] = true;
+                    c = BoardManager.Instance.chessmen[CurrentX - 1, CurrentY - 1];
+                    if (c != null && c.isWhite)
+                        r[CurrentX - 1, CurrentY - 1] = true;
                 }
                 
                 // Diagonal Right
-                if (currentX != 7 && currentY != 0)
+                if (CurrentX != 7 && CurrentY != 0)
                 {
-                    c = BoardManager.Instance.chessmen[currentX + 1, currentY - 1];
-                    if (c != null && !c.isWhite)
-                        r[currentX + 1, currentY - 1] = true;
+                    c = BoardManager.Instance.chessmen[CurrentX + 1, CurrentY - 1];
+                    if (c != null && c.isWhite)
+                        r[CurrentX + 1, CurrentY - 1] = true;
                 }
                 
                 // Middle 
-                if (currentY != 0)
+                if (CurrentY != 0)
                 {
-                    c = BoardManager.Instance.chessmen[currentX, currentY - 1];
+                    c = BoardManager.Instance.chessmen[CurrentX, CurrentY - 1];
                     if (c == null)
-                        r[currentX, currentY - 1] = true;
+                        r[CurrentX, CurrentY - 1] = true;
                 }
                 
                 // Middle on first move
-                if (currentY == 1)
+                if (CurrentY == 6)
                 {
-                    c = BoardManager.Instance.chessmen[currentX, currentY - 1];
-                    c2 = BoardManager.Instance.chessmen[currentX, currentY - 2];
+                    c = BoardManager.Instance.chessmen[CurrentX, CurrentY - 1];
+                    c2 = BoardManager.Instance.chessmen[CurrentX, CurrentY - 2];
                     if (c == null & c2 == null)
-                        r[currentX, currentY - 2] = true;
+                        r[CurrentX, CurrentY - 2] = true;
                 }
             }
             

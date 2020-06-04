@@ -6,8 +6,14 @@
     <e p="C:\Users\Steve\Documents\GitHub\Chess" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="ChessSetImport" t="Include">
-          <e p="Readme Eng.txt" t="Include" />
+        <e p="Imports" t="Include">
+          <e p="AllSkyFree" t="Include">
+            <e p="AllSkyFree_Menu.cs" t="Include" />
+            <e p="AllSkyFree_Readme.txt" t="Include" />
+          </e>
+          <e p="ChessSetImport" t="Include">
+            <e p="Readme Eng.txt" t="Include" />
+          </e>
         </e>
         <e p="Scripts" t="Include">
           <e p="BoardHighlights.cs" t="Include" />
@@ -18,7 +24,6 @@
             <e p="Bishop.cs" t="Include" />
             <e p="Horse.cs" t="Include" />
             <e p="King.cs" t="Include" />
-            <e p="Knight.cs" t="Include" />
             <e p="Pawn.cs" t="Include" />
             <e p="Queen.cs" t="Include" />
             <e p="Rook.cs" t="Include" />
