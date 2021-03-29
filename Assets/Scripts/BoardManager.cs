@@ -189,10 +189,7 @@ public class BoardManager : MonoBehaviour
 
     private void SpawnEnvironment()
     {
-        SpawnChessboardEnvironment(0,new Vector3(4,-0.6f,4));
-        SpawnChessboardEnvironment(1,new Vector3(4,-0.38f,4));
-        SpawnChessboardEnvironment(2,new Vector3(-0.375f,1.35f,-0.566f));
-        SpawnChessboardEnvironment(3,new Vector3(-0.4f,1.35f,8.54f));
+        SpawnChessboardEnvironment(0,new Vector3(0.5f,0.0f,0.5f));
     }
     
     private void SelectChessman(int x, int y)
