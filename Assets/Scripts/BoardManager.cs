@@ -40,7 +40,6 @@ public class BoardManager : MonoBehaviour
     {
         Instance = this;
         SpawnAllChessman();
-        SpawnEnvironment();
     }
 
     private void Update()
@@ -189,7 +188,6 @@ public class BoardManager : MonoBehaviour
 
     private void SpawnEnvironment()
     {
-        SpawnChessboardEnvironment(0,new Vector3(0.5f,0.0f,0.5f));
     }
     
     private void SelectChessman(int x, int y)
